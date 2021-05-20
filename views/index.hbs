@@ -3,8 +3,10 @@
     <ul>
         {{#each items}}
             <li>
+                <h3>{{name}}</h3>
+                <h3> {{field1}}</h3>
+                <h3> {{field2}}</h3>
                 <label>
-                    <span>{{ title }}</span>
                     <select>
                         <option>Сделал</option>
                         <option>В процессе</option>
@@ -14,7 +16,14 @@
             </li>
         {{/each}}
     </ul>
-    <button>Save</button>
 {{else}}
     <p>No items</p>
 {{/if}}
+<form action="/api/create" method="POST">
+    <h1>Добавить пользователя</h1>
+    <div>
+        <input type="text" name="name">
+        <label>Пользователь</label>
+    </div>
+    <button type="submit">Добавить</button>
+</form>
