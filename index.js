@@ -1,17 +1,41 @@
-import express from 'express'
-import path from "path"
-import serverRoutes from './routes/serverRoutes.js'
+const express = require('express');
+const mongoose = require('mongoose');
+const config = require('./config.js');
+const path = require('path');
+const serverRoutes = require('./routes/serverRoutes.js');
+const exphbs = require('express-handlebars');
 
-const PORT = 3000
-const __dirname = path.resolve()
+const PORT = 3000;
+const _dirname = path.resolve();
 
-const app = express()
-app.use(express.static(path.resolve(__dirname, 'static')))
-app.use(serverRoutes)
-// app.get('/', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'view/static', 'index.html'))
-// });
+const app = express();
 
-app.listen(PORT, () => {
-    console.log(`Server has been started on port ${PORT}...`)
-})
+const hbs = exphbs.create({
+    defaultLayout: 'main',
+    extname: 'hbs',
+    defaultView: "default",
+    layoutsDir: path.join(_dirname, "/views/layouts/"),
+    partialsDir: path.join(_dirname, "/views/partials/"),
+});
+app.engine('hbs', hbs.engine);
+app.set("view engine", "hbs");
+app.set('views', 'views');
+
+app.use(serverRoutes);
+
+async function start() {
+    try {
+        await mongoose.connect(config.dbConnect, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        app.listen(PORT, () => {
+            console.log(`Server has been started on port ${PORT}...`)
+        });
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
+
+start();

@@ -1,0 +1,20 @@
+<h1>Всем привет от самых лучших программистов Яночки, Гришечки и Тёмочки!</h1>
+{{#if items.length}}
+    <ul>
+        {{#each items}}
+            <li>
+                <label>
+                    <span>{{ title }}</span>
+                    <select>
+                        <option>Сделал</option>
+                        <option>В процессе</option>
+                        <option>Не сделал</option>
+                    </select>
+                </label>
+            </li>
+        {{/each}}
+    </ul>
+    <button>Save</button>
+{{else}}
+    <p>No items</p>
+{{/if}}

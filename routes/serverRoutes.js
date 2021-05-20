@@ -1,8 +1,18 @@
-import {Router} from 'express'
-import {getAll} from '../controllers/serverControllers.js'
+const express = require('express');
+const MainModel = require('../models/mainModel.js');
 
-const router = Router()
+const router = express.Router();
 
-router.get('/api/smth', getAll)
+router.get('/', ( async (req, res) => {
+    const items = await MainModel.find({});
+    res.render('index', {
+        title: "Главная страница",
+        isIndex: true,
+        items
+    });
+}))
+// router.get('/api/create', ((req, res) => {
+//     res.render('create');
+// }));
 
-export default router
+module.exports = router;
