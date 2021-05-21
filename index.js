@@ -11,14 +11,15 @@ const _dirname = path.resolve();
 
 const app = express();
 
-const ejs = exphbs.create({
+/*const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: 'ejs',
     defaultView: "default",
     layoutsDir: path.join(_dirname, "/views/layouts/"),
     partialsDir: path.join(_dirname, "/views/partials/"),
-});
-app.engine('ejs', ejs.engine );
+});*/
+
+//app.engine('ejs');
 app.set("view engine", "ejs");
 app.set('views', 'views');
 
