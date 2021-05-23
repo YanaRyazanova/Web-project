@@ -11,6 +11,12 @@ router.get('/', ( async (req, res) => {
         items
     });
 }))
+
+router.get('/api/getAll', (async (req, res) => {
+    const items = await MainModel.find({}).lean();
+    res.status(200).json(items);
+}));
+
 router.post('/api/create', (async (req, res) => {
     const newItem = new MainModel({
         name: req.body.name
