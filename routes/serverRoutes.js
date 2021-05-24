@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/',( async (req, res) => {
     const items = await MainModel.find({}).lean();
-    res.render('../views/layouts/index.ejs', {
+    res.render('../views/layouts/main.ejs', {
         title: "Главная страница",
         isIndex: true,
         items
