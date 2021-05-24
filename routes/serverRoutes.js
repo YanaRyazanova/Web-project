@@ -8,7 +8,7 @@ router.get('/', ( async (req, res) => {
     res.render('../views/layouts/main.ejs', {
         title: "Главная страница",
         isIndex: true,
-        items
+        json: items
     });
 }))
 
