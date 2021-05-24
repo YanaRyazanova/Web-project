@@ -4,8 +4,8 @@
     <%- include('../partials/head', {title: title}); %>
 </head>
 <body>
-    <nav>
-        <%- include('../partials/navbar'); %>
-    </nav>
+    <%- include('../partials/navbar'); %>
+
+    <%- include('../partials/table/table', {json: json}); %>
 </body>
 </html>
