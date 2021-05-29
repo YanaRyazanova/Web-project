@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const config = require('./config.js');
 const path = require('path');
 const serverRoutes = require('./routes/serverRoutes.js');
+const authRoutes = require('./routes/authRoutes.js');
 const exphbs = require('express-handlebars');
 
 const PORT = 3000;
@@ -23,7 +24,8 @@ app.set('views', 'views');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(serverRoutes);
-
+app.use('/auth', authRoutes)
+app.use(express.json());
 
 async function start() {
     try {

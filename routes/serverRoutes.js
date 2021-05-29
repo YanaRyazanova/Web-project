@@ -1,9 +1,11 @@
 const express = require('express');
 const MainModel = require('../models/mainModel.js');
+const authMiddleware = require('../middleware/authMiddleware.js');
+const roleMiddleware = require('../middleware/roleMiddleware.js');
 
 const router = express.Router();
 
-router.get('/', ( async (req, res) => {
+router.get('/',( async (req, res) => {
     const items = await MainModel.find({}).lean();
     res.render('index', {
         title: "Главная страница",
@@ -11,7 +13,10 @@ router.get('/', ( async (req, res) => {
         items
     });
 }))
-
+//     , [
+//     authMiddleware,
+//     roleMiddleware(["REDACTOR", "ADMIN"])
+// ]
 router.get('/api/getAll', (async (req, res) => {
     const items = await MainModel.find({}).lean();
     res.status(200).json(items);
