@@ -1,0 +1,9 @@
+<thead>
+    <caption>Общая ведомость</caption>
+    <th scope="col">Имя ребёнка</th>
+    <% Object.keys(json[0]).forEach(function (key) {  %>
+        <% if(key !== '_id' && key !== '__v' && key !== 'name'){ %>
+            <th scope="col"><%=key%></th>
+        <% }%>
+    <% }) %>
+</thead>
