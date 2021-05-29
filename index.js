@@ -24,7 +24,7 @@ app.set('views', 'views');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(serverRoutes);
-
+app.use(express.static(_dirname + '/static'))
 
 async function start() {
     try {
