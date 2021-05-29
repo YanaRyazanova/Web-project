@@ -12,6 +12,14 @@ router.get('/', ( async (req, res) => {
     });
 }))
 
+router.get('/register', (async (req, res) => {
+    res.render('../views/layouts/registration.ejs')
+}));
+
+router.get('/login', (async (req, res) => {
+    res.render('../views/layouts/authorization.ejs')
+}));
+
 router.get('/api/getAll', (async (req, res) => {
     const items = await MainModel.find({}).lean();
     res.status(200).json(items);
