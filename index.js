@@ -25,6 +25,7 @@ app.set('views', 'views');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(serverRoutes);
+app.use(express.static(_dirname + '/static'))
 app.use('/auth', authRoutes)
 app.use(express.json());
 
