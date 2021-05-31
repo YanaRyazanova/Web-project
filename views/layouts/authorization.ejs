@@ -3,16 +3,18 @@
     <meta charset="UTF-8">
     <title>Авторизация</title>
     <link rel="stylesheet" href="authStyle.css">
+    <%- include('../partials/head'); %>
 </head>
 <body>
+    <%- include('../partials/navbar'); %>
     <div class="wrapper fadeInDown">
         <div id="formContent">
 
-            <h2 class="active"> Войти </h2>
-            <a href="/register" class="inactive register"> Зарегистрироваться </a>
+            <h2 href="/login" class="active"> Войти </h2>
+            <h2 class="inactive register"><a href="/register" >Зарегистрироваться</a> </h2>
 
             <form action="/auth/login" method="post">
-                <input type="text" class="fadeIn second" name="username" placeholder="Логин или email">
+                <input type="text" class="fadeIn second" name="username" placeholder="Логин">
                 <input type="password" class="fadeIn third" name="password" placeholder="Пароль">
                 <input type="submit" class="fadeIn fourth" value="Войти">
             </form>
