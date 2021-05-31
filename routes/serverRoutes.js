@@ -5,7 +5,10 @@ const roleMiddleware = require('../middleware/roleMiddleware.js');
 
 const router = express.Router();
 
-router.get('/',( async (req, res) => {
+router.get('/', [
+        authMiddleware,
+        roleMiddleware(["REDACTOR", "ADMIN"])
+    ],( async (req, res) => {
     const items = await MainModel.find({}).lean();
     res.render('../views/layouts/main.ejs', {
         title: "Главная страница",
@@ -13,10 +16,6 @@ router.get('/',( async (req, res) => {
         json: items
     });
 }))
-//     , [
-//     authMiddleware,
-//     roleMiddleware(["REDACTOR", "ADMIN"])
-// ]
 router.get('/register', (async (req, res) => {
     res.render('../views/layouts/registration.ejs')
 }));

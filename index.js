@@ -5,6 +5,7 @@ const path = require('path');
 const serverRoutes = require('./routes/serverRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
 const exphbs = require('express-handlebars');
+const cookieParser = require("cookie-parser");
 
 const PORT = 3000;
 const _dirname = path.resolve();
@@ -28,6 +29,7 @@ app.use(serverRoutes);
 app.use(express.static(_dirname + '/static'))
 app.use('/auth', authRoutes)
 app.use(express.json());
+app.use(cookieParser());
 
 async function start() {
     try {
