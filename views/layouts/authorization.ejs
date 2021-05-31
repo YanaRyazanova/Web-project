@@ -9,11 +9,11 @@
         <div id="formContent">
 
             <h2 class="active"> Войти </h2>
-            <h2 class="inactive register"> Зарегистрироваться </h2>
+            <a href="/register" class="inactive register"> Зарегистрироваться </a>
 
-            <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Логин или email">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="Пароль">
+            <form action="/auth/login" method="post">
+                <input type="text" class="fadeIn second" name="username" placeholder="Логин или email">
+                <input type="password" class="fadeIn third" name="password" placeholder="Пароль">
                 <input type="submit" class="fadeIn fourth" value="Войти">
             </form>
 

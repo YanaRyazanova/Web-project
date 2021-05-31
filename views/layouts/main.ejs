@@ -1,7 +1,11 @@
-{{> head}}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <%- include('../partials/head', {title: title}); %>
+</head>
 <body>
-    {{> navbar}}
-    <div>
-        {{{ body }}}
-    </div>
+    <%- include('../partials/navbar'); %>
+
+    <%- include('../partials/editor_table/table.ejs', {json: json}); %>
 </body>
+</html>
