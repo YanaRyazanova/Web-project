@@ -1,9 +1,14 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #39ace7;
 }
 
 li {
@@ -20,11 +25,16 @@ li a {
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #111;
+    background-color: #2fa0db;
 }
 
 html {
     background-color: #fff;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
 }
 
 table {
@@ -33,11 +43,12 @@ table {
     border-collapse: collapse;
     text-align: center;
     box-shadow: 0 10px 20px 0 rgba(0,0,0,0.3);
-    width: 100%;
+    width: 90%;
+    margin: auto;
 }
 th, td:first-child {
     /*background: #AFCDE7;*/
-    /*color: white;*/
+    color: #1c87bd;
     padding: 10px 20px;
 }
 th, td {
@@ -50,4 +61,10 @@ td {
 }
 th:first-child, td:first-child {
     text-align: left;
+}
+
+caption {
+    color: #1c87bd;
+    font-size: 30px;
+    margin: 20px;
 }
