@@ -1,21 +1,29 @@
 <html>
 <head>
-    <title>Регистрация</title>
-    <link rel="stylesheet" href="signupStyle.css">
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="authStyle.css">
+    <%- include('../partials/head'); %>
 </head>
 <body>
-<form action="/auth/registration" method="post">
-    <label>
-        Имя
-        <input type="text" name="username" required>
-    </label>
-    <br>
-    <label>
-        Пароль
-        <input type="password" name="password" required>
-    </label>
-    <br>
-    <button type="submit">Submit</button>
-</form>
+<%- include('../partials/navbar'); %>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+            <h2 class="inactive register"><a href="/login">Войти</a></h2>
+            <h2 class="active"> Зарегистрироваться </h2>
+
+            <form action="/auth/rgister" method="post">
+                <input type="text" class="fadeIn second" name="username" placeholder="Логин">
+                <input type="password" class="fadeIn third" name="password" placeholder="Пароль">
+                <input type="submit" class="fadeIn fourth" value="Зарегистрироваться">
+            </form>
+
+            <div id="formFooter">
+                <a class="register" href="#">Забыли пароль?</a>
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>
