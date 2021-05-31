@@ -18,12 +18,12 @@ class authController {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()){
-                res.status(400).json({ message: "Ошибка при регистрации", errors});
+                res.status(403).json({ message: "Ошибка при регистрации", errors});
             }
             const {username, password} = req.body;
             const candidate = await User.findOne({ username });
             if (candidate) {
-                res.status(400).json({ message: "Пользователем с таким именем уже существует"});
+                res.status(403).json({ message: "Пользователем с таким именем уже существует"});
             }
             const hashPassword = bcrypt.hashSync(password, 7);
             const userRole = new Role({ value: ["USER"]});
