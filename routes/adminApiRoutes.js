@@ -25,6 +25,19 @@ router.post('/api/addColumn', (async (req, res) => {
         console.log(e);
         res.status(403).json("Не получилось добавить колонку");
     }
+}));
+
+router.post('/api/addRow', (async (req, res) => {
+    try{
+        const { newUser } = req.body;
+        const newRow = new MainModel({ name: newUser });
+        await newRow.save();
+        res.status(200).json('Super!');
+    }
+    catch (e) {
+        console.log(e);
+        res.status(403).json("Не получилось добавить строчку");
+    }
 }))
 
 module.exports = router;
