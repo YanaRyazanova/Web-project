@@ -7,10 +7,10 @@
     <%- include('../partials/navbar'); %>
     <%- include('../partials/editor_table/table.ejs', {json: json}); %>
     <h2>Добавить новую колонку</h2>
-    <form action="/api/addColumn" method="post">
+    <form action="/admin/api/addColumn" method="post">
         <label>
             Название колонки
-            <input type="text" required>
+            <input type="text" required name="newColumn">
         </label>
         <br>
         <label>
@@ -22,6 +22,15 @@
                 <option>4</option>
                 <option>5</option>
             </select>
+        </label>
+        <br>
+        <input type="submit" value="Добавить">
+    </form>
+    <h2>Добавить новую строчку</h2>
+    <form action="/admin/api/addRow" method="post">
+        <label>
+            Название колонки
+            <input type="text" required name="newColumn">
         </label>
         <br>
         <input type="submit" value="Добавить">
