@@ -4,7 +4,7 @@ const config = require('./config.js');
 const path = require('path');
 const serverRoutes = require('./routes/serverRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
-const adminRoutes = require('./routes/adminApiRoutes');
+const adminRoutes = require('./routes/adminApiRoutes.js');
 const exphbs = require('express-handlebars');
 const cookieParser = require("cookie-parser");
 
@@ -13,15 +13,6 @@ const _dirname = path.resolve();
 
 const app = express();
 
-/*const hbs = exphbs.create({
-    defaultLayout: 'main',
-    extname: 'ejs',
-    defaultView: "default",
-    layoutsDir: path.join(_dirname, "/views/layouts/"),
-    partialsDir: path.join(_dirname, "/views/partials/"),
-});*/
-
-//app.engine('ejs');
 app.set("view engine", "ejs");
 app.set('views', 'views');
 
