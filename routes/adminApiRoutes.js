@@ -13,10 +13,11 @@ router.get('/api/getAll', (async (req, res) => {
 
 router.post('/api/addColumn', (async (req, res) => {
     try{
-        const {newColumn, defaultValue} = req.body;
+        const { newColumn, defaultValue } = req.body;
+        let value = {};
+        value[newColumn] = defaultValue;
         const res_ = await MainModel.updateMany({},
-            { $set: { newColumn:  defaultValue }},
-            { upsert: true});
+            [ {$set : value } ]);
         console.log(res_);
         res.status(200).json('Success!');
     }
