@@ -49,7 +49,8 @@ class authController {
                 res.status(400).json({ message: "Упс! Кажется пароль неверный:("});
             }
             const token = generateAccessToken(user._id, user.roles);
-            return res.json({ token });
+            res.cookie('user', token);
+            return res.send("Cookie Set");
         }
         catch (e) {
             console.log(e);

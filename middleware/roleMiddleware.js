@@ -7,7 +7,7 @@ module.exports = function (roles) {
             next();
         }
         try {
-            const token = req.headers.authorization.split(' ')[1];
+            const token = req.headers.cookie.split(';').find(x => x.indexOf('user') !== -1).split('=')[1];
             if (!token){
                 res.status(403).json({ message: " Пользователь не авторизован"});
             }
