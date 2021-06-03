@@ -7,5 +7,10 @@
     <%- include('../partials/navbar'); %>
 
     <%- include('../partials/editor_table/table.ejs', {json: json}); %>
+    <form action="/admin/api/addColumn" method="post">
+        <label>Новая колонка<input type="text" name="newColumn"></input></label>
+        <label>Значение по умолчанию<input type="text" name="defaultValue"></input></label>
+        <button type="submit">Создать</button>
+    </form>
 </body>
 </html>

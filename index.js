@@ -4,6 +4,7 @@ const config = require('./config.js');
 const path = require('path');
 const serverRoutes = require('./routes/serverRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
+const adminRoutes = require('./routes/adminApiRoutes');
 const exphbs = require('express-handlebars');
 const cookieParser = require("cookie-parser");
 
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(serverRoutes);
 app.use(express.static(_dirname + '/static'))
 app.use('/auth', authRoutes)
+app.use('/admin', adminRoutes);
 app.use(express.json());
 app.use(cookieParser());
 
