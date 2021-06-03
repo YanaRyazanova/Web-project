@@ -31,5 +31,22 @@ router.get('/adminDashboard', [authMiddleware, roleMiddleware(["ADMIN"])], (asyn
     });
 }));
 
+router.get('/readTable', [authMiddleware, roleMiddleware(["USER", "ADMIN", "EDITOR"])], (async (req, res) => {
+    const items = await MainModel.find({}).lean();
+    res.render('../views/layouts/readTable.ejs', {
+        title: "Таблица",
+        isIndex: true,
+        json: items
+    });
+}));
+
+router.get('/editTable', [authMiddleware, roleMiddleware(["ADMIN", "EDITOR"])], (async (req, res) => {
+    const items = await MainModel.find({}).lean();
+    res.render('../views/layouts/editTable.ejs', {
+        title: "Таблица",
+        isIndex: true,
+        json: items
+    });
+}));
 
 module.exports = router;
