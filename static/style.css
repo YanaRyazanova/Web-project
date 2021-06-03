@@ -27,7 +27,14 @@ li a {
 li a:hover {
     background-color: #2fa0db;
 }
+ul li:last-child{
+    float: right;
+    padding-right: 30px;
+}
 
+ui li:first-child{
+    padding-left: 30px;
+}
 html {
     background-color: #fff;
 }
