@@ -1,12 +1,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Авторизация</title>
     <link rel="stylesheet" href="authStyle.css">
-    <%- include('../partials/head'); %>
+    <%- include('../partials/head', {title: title});%>
 </head>
 <body>
-    <%- include('../partials/navbar'); %>
+    <%- include('../partials/navbar', {isAuth: isAuth}); %>
     <div class="wrapper fadeInDown">
         <div id="formContent">
 
@@ -18,11 +17,6 @@
                 <input type="password" class="fadeIn third" name="password" placeholder="Пароль">
                 <input type="submit" class="fadeIn fourth" value="Войти">
             </form>
-
-            <div id="formFooter">
-                <a class="register" href="#">Забыли пароль?</a>
-            </div>
-
         </div>
     </div>
 </body>

@@ -4,7 +4,7 @@
     <%- include('../partials/head', {title: title}); %>
 </head>
     <body>
-        <%- include('../partials/navbar'); %>
+        <%- include('../partials/navbar', {isAuth: isAuth}); %>
         <%- include('../partials/reader_table/table') %>
     </body>
 </html>

@@ -20,43 +20,65 @@ function getRoles(req) {
 
 router.get('/', ( async (req, res) => {
     const items = await MainModel.find({}).lean();
+    const isAuth = !req.headers.cookie;
     res.render('../views/layouts/main.ejs', {
         title: "Главная страница",
         isIndex: true,
-        json: items
+        isAuth: isAuth
     });
 }));
 
 router.get('/register', (async (req, res) => {
-    res.render('../views/layouts/registration.ejs')
+    const isAuth = !req.headers.cookie;
+    res.render('../views/layouts/registration.ejs',{
+        title: "Главная страница",
+            isIndex: true,
+            isAuth: isAuth
+    });
 }));
 
 router.get('/login', (async (req, res) => {
-    res.render('../views/layouts/authorization.ejs')
+    const isAuth = !req.headers.cookie;
+    res.render('../views/layouts/authorization.ejs',{
+        title: "Главная страница",
+        isIndex: true,
+        isAuth: isAuth})
+}));
+
+router.get('/logout', (async (req, res) => {
+    const isAuth = !req.headers.cookie;
+    res.render('../views/layouts/logout.ejs',{
+        title: "Выход",
+        isIndex: true,
+        isAuth: isAuth})
 }));
 
 router.get('/table', [authMiddleware], (async (req, res) => {
     const items = await MainModel.find({}).lean();
+    const isAuth = !req.headers.cookie;
     const roles = getRoles(req);
     if (roles.includes("ADMIN")){
         res.render('../views/layouts/adminDashboard.ejs', {
             title: "Главная страница",
             isIndex: true,
-            json: items
+            json: items,
+            isAuth: isAuth
         });
     }
     else if (roles.includes("EDITOR")){
         res.render('../views/layouts/editTable.ejs', {
             title: "Главная страница",
             isIndex: true,
-            json: items
+            json: items,
+            isAuth: isAuth
         });
     }
     else if (roles.includes("USER")){
         res.render('../views/layouts/readTable.ejs', {
             title: "Таблица",
             isIndex: true,
-            json: items
+            json: items,
+            isAuth: isAuth
         });
     }
 }))

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <%- include('../partials/head'); %>
+    <%- include('../partials/head', {title: title});%>
 </head>
 <body>
-    <%- include('../partials/navbar'); %>
+    <%- include('../partials/navbar', {isAuth: isAuth}); %>
     <%- include('../partials/editor_table/table.ejs', {json: json}); %>
     <h2>Добавить новую колонку</h2>
     <form action="/admin/api/addColumn" method="post">

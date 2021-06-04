@@ -1,0 +1,17 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="authStyle.css">
+    <%- include('../partials/head', {title: title});%>
+</head>
+<body>
+<%- include('../partials/navbar', {isAuth: isAuth}); %>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <h2 class="active">Вы действительно хотите выйти?</h2>
+        <input type="button" class="fadeIn fourth" value="Да">
+        <input type="button" class="fadeIn fourth" value="Нет">
+    </div>
+</div>
+</body>
+</html>
