@@ -20,7 +20,9 @@ function getRoles(req) {
 
 router.get('/', ( async (req, res) => {
     const items = await MainModel.find({}).lean();
-    const isAuth = !req.headers.cookie;
+    let isAuth = false;
+    if (req.headers.cookie && req.headers.cookie.includes("user"))
+        isAuth = true;
     res.render('../views/layouts/main.ejs', {
         title: "Главная страница",
         isIndex: true,
@@ -82,23 +84,5 @@ router.get('/table', [authMiddleware], (async (req, res) => {
         });
     }
 }))
-
-// router.get('/adminDashboard', [authMiddleware, roleMiddleware(["ADMIN"])], (async (req, res) => {
-//     const items = await MainModel.find({}).lean();
-//     res.render('../views/layouts/adminDashboard.ejs', {
-//         title: "Главная страница",
-//         isIndex: true,
-//         json: items
-//     });
-// }));
-
-// router.get('/readTable', [authMiddleware, roleMiddleware(["USER", "ADMIN", "EDITOR"])], (async (req, res) => {
-//     const items = await MainModel.find({}).lean();
-//     res.render('../views/layouts/readTable.ejs', {
-//         title: "Таблица",
-//         isIndex: true,
-//         json: items
-//     });
-// }));
 
 module.exports = router;
