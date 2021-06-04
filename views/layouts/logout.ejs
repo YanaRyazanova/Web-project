@@ -3,14 +3,24 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="authStyle.css">
     <%- include('../partials/head', {title: title});%>
+    <script>
+        function noButton() {
+            window.location.href = '/';
+        }
+
+        function yesButton() {
+            document.cookie = "user=-1; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+            window.location.href = '/';
+        }
+    </script>
 </head>
 <body>
 <%- include('../partials/navbar', {isAuth: isAuth}); %>
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <h2 class="active">Вы действительно хотите выйти?</h2>
-        <input type="button" class="fadeIn fourth" value="Да">
-        <input type="button" class="fadeIn fourth" value="Нет">
+        <input type="button" onclick="yesButton()" value="Да">
+        <input type="button" onclick="noButton()" value="Нет">
     </div>
 </div>
 </body>
