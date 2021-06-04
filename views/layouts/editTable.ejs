@@ -26,14 +26,15 @@
                             'id': items[rowIndex]['_id'],
                             'field': keys[cellIndex]
                         };
-
+                        let data = new FormData();
+                        data.append( "json", JSON.stringify( logJson ) );
                         fetch('/editor/api/update', {
                             method: 'post',
                             headers: {
                                 'Accept': 'application/json, text/plain, */*',
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify(logJson)
+                            body: JSON.stringify( logJson )
                         })
                             .then(res => res.json())
                             .then(res => console.log(res));

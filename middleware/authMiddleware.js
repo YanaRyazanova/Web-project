@@ -7,12 +7,18 @@ module.exports = function (req, res, next) {
         next();
     }
     try {
-        const token = req.headers.cookie.split(';').find(x => x.indexOf('user') !== -1).split('=')[1];
-        if (!token){
-            res.status(403).json({ message: "Пользователь не авторизован"});
+        if (req.headers.cookie === undefined) {
+            res.status(403).json({message: "Пользователь не авторизован"});
         }
-        const decodedData = jwt.verify(token, secretKey);
-        req.user = decodedData;
+        else {
+            const token = req.headers.cookie.split(';').find(x => x.indexOf('user') !== -1).split('=')[1];
+            if (!token){
+                res.status(403).json({ message: "Пользователь не авторизован"});
+            }
+            else {
+                req.user = jwt.verify(token, secretKey);;
+            }
+        }
         next();
     }
     catch (e) {

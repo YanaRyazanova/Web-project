@@ -10,6 +10,9 @@ const { secretKey } = require('../config.js');
 const router = express.Router();
 
 function getRoles(req) {
+    if (req.headers.cookie === undefined) {
+        return [];
+    }
     const token = req.headers.cookie.split(';').find(x => x.indexOf('user') !== -1).split('=')[1];
     if (!token){
         return { message: " Пользователь не авторизован"};

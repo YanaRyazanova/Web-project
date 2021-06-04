@@ -10,7 +10,7 @@ class bdController
             const { newColumn, defaultValue } = req.body;
             let value = {};
             value[newColumn] = defaultValue;
-            const res_ = await MainModel.updateMany({},
+            await MainModel.updateMany({},
                 [ {$set : value } ]);
             res.status(200).json('Success!');
         } catch (e) {
@@ -22,13 +22,25 @@ class bdController
     async addObject(req, res) {
         try {
             const { newUser } = req.body;
-            const newRow = new MainModel({ name: newUser });
-            await newRow.save();
+            const allField = MainModel.findOne({});
+            console.log(allField.username);
+            // const newRow = new MainModel({ name: newUser });
+            // await newRow.save();
             res.status(200).json('Super!');
         } catch (e) {
             console.log(e);
             res.status(403).json({message: "Не удалось выполнить изменение", error: e});
         }
+    }
+
+    async changeFieldValue(req, res) {
+        const { id, value, field } = req.body;
+        const newField = {};
+        newField[field] = value;
+        const a = await MainModel.updateOne({ _id: id},
+             { $set: newField });
+        console.log(a);
+        res.redirect('/');
     }
 }
 

@@ -9,6 +9,7 @@ const editorRoutes = require('./routes/redactorApiRoutes.js');
 const exphbs = require('express-handlebars');
 const cookieParser = require("cookie-parser");
 
+
 const PORT = 3000;
 const _dirname = path.resolve();
 

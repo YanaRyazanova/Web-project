@@ -29,6 +29,8 @@ class authController {
             const userRole = new Role({ value: ["USER"]});
             const user = new User({ username, password : hashPassword , roles: [userRole.value]});
             await user.save();
+            const token = generateAccessToken(user._id, user.roles);
+            res.cookie('user', token);
             return res.json({ message: "Пользователь успешно зарегистирован!"})
         }
         catch (e) {
@@ -40,21 +42,26 @@ class authController {
     async login(req, res) {
         try {
             const {username, password} = req.body;
+            console.log(req.body);
             const user = await User.findOne({ username });
+            console.log(user);
             if (!user) {
                 res.status(400).json({ message: "Такого пользователя не обнаружено:("});
             }
-            const validPassword = bcrypt.compareSync(password, user.password);
-            if (!validPassword) {
-                res.status(400).json({ message: "Упс! Кажется пароль неверный:("});
+            else {
+                const validPassword = bcrypt.compareSync(password, user.password);
+                if (!validPassword) {
+                    res.status(400).json({message: "Упс! Кажется пароль неверный:("});
+                } else {
+                    const token = generateAccessToken(user._id, user.roles);
+                    res.cookie('user', token);
+                    return res.send("Cookie Set");
+                }
             }
-            const token = generateAccessToken(user._id, user.roles);
-            res.cookie('user', token);
-            return res.send("Cookie Set");
         }
         catch (e) {
             console.log(e);
-            res.status(400).json({ message: "Login error"});
+            res.status(403).json({ message: "Login error"});
         }
     }
 }
