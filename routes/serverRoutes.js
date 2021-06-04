@@ -20,9 +20,7 @@ function getRoles(req) {
 
 router.get('/', ( async (req, res) => {
     const items = await MainModel.find({}).lean();
-    let isAuth = false;
-    if (req.headers.cookie && req.headers.cookie.includes("user"))
-        isAuth = true;
+    let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/main.ejs', {
         title: "Главная страница",
         isIndex: true,
@@ -31,7 +29,7 @@ router.get('/', ( async (req, res) => {
 }));
 
 router.get('/register', (async (req, res) => {
-    const isAuth = !req.headers.cookie;
+    let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/registration.ejs',{
         title: "Главная страница",
             isIndex: true,
@@ -40,7 +38,7 @@ router.get('/register', (async (req, res) => {
 }));
 
 router.get('/login', (async (req, res) => {
-    const isAuth = !req.headers.cookie;
+    let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/authorization.ejs',{
         title: "Главная страница",
         isIndex: true,
@@ -48,7 +46,7 @@ router.get('/login', (async (req, res) => {
 }));
 
 router.get('/logout', (async (req, res) => {
-    const isAuth = !req.headers.cookie;
+    let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/logout.ejs',{
         title: "Выход",
         isIndex: true,
@@ -57,7 +55,7 @@ router.get('/logout', (async (req, res) => {
 
 router.get('/table', [authMiddleware], (async (req, res) => {
     const items = await MainModel.find({}).lean();
-    const isAuth = !req.headers.cookie;
+    let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     const roles = getRoles(req);
     if (roles.includes("ADMIN")){
         res.render('../views/layouts/adminDashboard.ejs', {

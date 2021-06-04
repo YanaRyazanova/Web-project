@@ -12,11 +12,31 @@
             <h2 class="inactive register"><a href="/login">Войти</a></h2>
             <h2 class="active"> Зарегистрироваться </h2>
 
-            <form action="/auth/registration" method="post">
+            <form name="signInForm">
                 <input type="text" class="fadeIn second" name="username" placeholder="Логин">
                 <input type="password" class="fadeIn third" name="password" placeholder="Пароль">
                 <input type="submit" class="fadeIn fourth" value="Зарегистрироваться">
             </form>
+            <script>
+                let signInForm = document.forms[0]
+                signInForm.onsubmit = async (e) => {
+                    e.preventDefault();
+
+                    let response = await fetch('/auth/registration', {
+                        method: 'POST',
+                        body: new FormData(signInForm)
+                    });
+                    if (response.status == 200) {
+                        alert("Успешно!")
+                        window.location.href = '/';
+                    }
+                    else {
+                        let result = await response.json();
+                        alert(result.message);
+                        window.location.href = '/register';
+                    }
+                };
+            </script>
         </div>
     </div>
 </body>
