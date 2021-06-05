@@ -34,7 +34,7 @@ router.get('/', ( async (req, res) => {
 router.get('/register', (async (req, res) => {
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/registration.ejs',{
-        title: "Главная страница",
+        title: "Регистрация",
             isIndex: true,
             isAuth: isAuth
     });
@@ -43,7 +43,7 @@ router.get('/register', (async (req, res) => {
 router.get('/login', (async (req, res) => {
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/authorization.ejs',{
-        title: "Главная страница",
+        title: "Авторизация",
         isIndex: true,
         isAuth: isAuth})
 }));
@@ -51,7 +51,7 @@ router.get('/login', (async (req, res) => {
 router.get('/test', (async (req, res) => {
     const items = await MainModel.find({}).lean();
     res.render('../views/layouts/adminDashboard.ejs', {
-        title: "Главная страница",
+        title: "Тест",
         isIndex: true,
         json: items,
         isAuth: true
@@ -72,7 +72,7 @@ router.get('/table', [authMiddleware], (async (req, res) => {
     const roles = getRoles(req);
     if (roles.includes("ADMIN")){
         res.render('../views/layouts/adminDashboard.ejs', {
-            title: "Главная страница",
+            title: "Таблица",
             isIndex: true,
             json: items,
             isAuth: isAuth
@@ -80,7 +80,7 @@ router.get('/table', [authMiddleware], (async (req, res) => {
     }
     else if (roles.includes("EDITOR")){
         res.render('../views/layouts/editTable.ejs', {
-            title: "Главная страница",
+            title: "Таблица",
             isIndex: true,
             json: items,
             isAuth: isAuth

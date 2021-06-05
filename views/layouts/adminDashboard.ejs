@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <%- include('../partials/head', {title: title});%>
-</head>
-<body>
-    <%- include('../partials/navbar', {isAuth: isAuth}); %>
-    <%- include('../partials/editor_table/table.ejs', {json: json}); %>
-    <h2>Добавить новую колонку</h2>
-    <form action="/admin/api/addColumn" method="post">
-        <label>
-            Название колонки
-            <input type="text" required name="newColumn">
-        </label>
-        <br>
-        <label>
-            Значение по-умолчанию
-            <select name="defaultValue">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </label>
-        <br>
-        <input type="submit" value="Добавить">
-    </form>
-    <h2>Добавить новую строчку</h2>
-    <form action="/admin/api/addRow" method="post">
-        <label>
-            Имя
-            <input type="text" required name="newUser">
-        </label>
-        <br>
-        <input type="submit" value="Добавить">
-    </form>
-</form>
-</body>
+    <head>
+        <%- include('../partials/head', {title: title});%>
+    </head>
+    <body>
+        <%- include('../partials/navbar', {isAuth: isAuth}); %>
+        <%- include('../partials/editor_table/table.ejs', {json: json}); %>
+
+        <div class="wrapper">
+            <div id="formContent">
+                <h2>Добавить новую колонку</h2>
+                <form action="/admin/api/addColumn" method="post">
+                    <label>
+                        <h3>Название колонки</h3>
+                        <br>
+                        <input type="text" required name="newColumn">
+                    </label>
+                    <br>
+                    <label>
+                        <h3>Значение по-умолчанию</h3>
+                        <br>
+                        <input type="text" name="defaultValue" required>
+                    </label>
+                    <br>
+                    <input type="submit" value="Добавить">
+                </form>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div id="formContent">
+                <h2>Добавить новую строчку</h2>
+                <form action="/admin/api/addRow" method="post">
+                    <label>
+                        <h3>Имя</h3>
+                        <br>
+                        <input type="text" required name="newUser">
+                    </label>
+                    <br>
+                    <input type="submit" value="Добавить">
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
