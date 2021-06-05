@@ -50,7 +50,7 @@ router.get('/login', (async (req, res) => {
 
 router.get('/test', (async (req, res) => {
     const items = await MainModel.find({}).lean();
-    res.render('../views/layouts/editTable.ejs', {
+    res.render('../views/layouts/adminDashboard.ejs', {
         title: "Главная страница",
         isIndex: true,
         json: items,

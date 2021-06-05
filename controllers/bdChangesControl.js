@@ -46,11 +46,11 @@ class bdController
     }
 
     async changeFieldValue(req, res) {
-        const { id, value, field } = req.body;
+        const {id, value, field} = req.body;
         const newField = {};
         newField[field] = value;
-        await MainModel.updateOne({ _id: id},
-             [{ $set: newField }]);
+        await MainModel.updateOne({_id: id},
+            [{$set: newField}]);
         res.status(200).redirect('/');
     }
 }
