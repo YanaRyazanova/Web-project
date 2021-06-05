@@ -21,13 +21,17 @@
                 let authForm = document.forms[0]
                 authForm.onsubmit = async (e) => {
                     e.preventDefault();
-
+                    let formData = new FormData(authForm)
+                    let bodyJson = {
+                        "username" : formData.get("username"),
+                        "password" : formData.get("password")
+                    }
                     let response = await fetch('/auth/login', {
                         method: 'post',
                         headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Content-Type': 'application/json',
                         },
-                        body: new FormData(authForm)
+                        body: JSON.stringify(bodyJson)
                     });
                     if (response.status === 200) {
                         alert("Успешно!")
