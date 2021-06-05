@@ -1,6 +1,8 @@
 const User = require('../models/User.js');
 const Role = require('../models/Role.js');
 const MainModel = require('../models/mainModel.js');
+const jsonFile = require('jsonfile');
+const fs = require('fs');
 
 
 class bdController
@@ -10,8 +12,17 @@ class bdController
             const { newColumn, defaultValue } = req.body;
             let value = {};
             value[newColumn] = defaultValue;
+            let data = fs.readFileSync('./models/mainModelStrict.json');
+            let mainModelStructure = JSON.parse(data);
+            mainModelStructure[newColumn] = defaultValue;
+            let newStrict = JSON.stringify(mainModelStructure);
+            fs.writeFile('./models/mainModelStrict.json', newStrict, err => {
+                if(err) throw err;
+                console.log("New data added");
+            });
             await MainModel.updateMany({},
-                [ {$set : value } ]);
+                [ {$set : value } ],
+                { strict: true });
             res.status(200).json('Success!');
         } catch (e) {
             console.log(e);
@@ -22,10 +33,18 @@ class bdController
     async addObject(req, res) {
         try {
             const { newUser } = req.body;
-            const allField = MainModel.findOne({});
-            console.log(allField.username);
-            // const newRow = new MainModel({ name: newUser });
-            // await newRow.save();
+            let data = fs.readFileSync('./models/mainModelStrict.json');
+            let newFields = JSON.parse(data);
+            console.log(newFields);
+            const newRow = new MainModel({"name" : newUser });
+            await newRow.save();
+            const b = await MainModel.findOne({"name" : newUser });
+            console.log(b);
+            const a = await MainModel.updateOne({ "name": newUser },
+                [ { $set: newFields } ]);
+            console.log(a);
+            const c = await MainModel.findOne({"name" : newUser });
+            console.log(c);
             res.status(200).json('Super!');
         } catch (e) {
             console.log(e);
@@ -35,8 +54,13 @@ class bdController
 
     async changeFieldValue(req, res) {
         const { id, value, field } = req.body;
+        console.log(req.body);
+        console.log(id, value, field);
         const newField = {};
         newField[field] = value;
+        const b = await MainModel.findOne({_id: id});
+        console.log(b["field1"]);
+        console.log(b["field3"]);
         const a = await MainModel.updateOne({ _id: id},
              { $set: newField });
         console.log(a);

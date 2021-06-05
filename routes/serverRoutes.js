@@ -48,6 +48,16 @@ router.get('/login', (async (req, res) => {
         isAuth: isAuth})
 }));
 
+router.get('/test', (async (req, res) => {
+    const items = await MainModel.find({}).lean();
+    res.render('../views/layouts/adminDashboard.ejs', {
+        title: "Главная страница",
+        isIndex: true,
+        json: items,
+        isAuth: true
+    });
+}))
+
 router.get('/logout', (async (req, res) => {
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/logout.ejs',{

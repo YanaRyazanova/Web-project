@@ -6,7 +6,6 @@ const serverRoutes = require('./routes/serverRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
 const adminRoutes = require('./routes/adminApiRoutes.js');
 const editorRoutes = require('./routes/redactorApiRoutes.js');
-const exphbs = require('express-handlebars');
 const cookieParser = require("cookie-parser");
 
 
