@@ -17,6 +17,33 @@
                 <input type="password" class="fadeIn third" name="password" placeholder="Пароль" required>
                 <input type="submit" class="fadeIn fourth" value="Зарегистрироваться">
             </form>
+            <script>
+                let signInForm = document.forms[0]
+                signInForm.onsubmit = async (e) => {
+                    e.preventDefault();
+                    let formData = new FormData(signInForm)
+                    let bodyJson = {
+                        "username" : formData.get("username"),
+                        "password" : formData.get("password")
+                    }
+                    let response = await fetch('/auth/registration', {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(bodyJson)
+                    });
+                    if (response.status === 200) {
+                        alert("Успешно!")
+                        window.location.href = '/';
+                    }
+                    else {
+                        let result = await response.json();
+                        alert(result.message);
+                        window.location.href = '/register';
+                    }
+                };
+            </script>
         </div>
     </div>
 </body>
