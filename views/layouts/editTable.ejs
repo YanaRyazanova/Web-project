@@ -6,7 +6,7 @@
     <body>
         <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
         <%- include('../partials/editor_table/table') %>
-
+        <%- include('../partials/comments', {json: json}); %>
         <script>
             let items = JSON.parse('<%- JSON.stringify(json) %>');
             let keys = [];
