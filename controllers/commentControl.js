@@ -2,9 +2,9 @@ const CommentModel = require('../models/comments.js');
 
 class commentController {
     async addComment(req, res) {
-        const { user, x, y, comment } = req.body;
+        const { x, y, comment } = req.body;
         const newComment = new CommentModel({
-            "user": user,
+            "user": "1",
             "x": x,
             "y": y,
             "comment": comment
