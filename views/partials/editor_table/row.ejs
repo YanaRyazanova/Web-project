@@ -6,10 +6,10 @@
                 <label>
                     <select name="list1" class="selector">
                         <%for (let j = 1; j < 6; j++){%>
-                            <%if(json[i][key] === j) {%>
+                            <%if(json[i][key] === 0) {%>
                                 <option selected><%=j%></option>
                             <%} else {%>
-                                <option ><%=j%></option>
+                                <option><%=j%></option>
                             <%}}%>
                     </select>
                 </label>
@@ -17,3 +17,14 @@
         <% } %>
     <% }) %>
 </tr>
+<script>
+    Object.keys(json[i]).forEach(function (key) {
+        if (key !== '_id' && key !== '__v' && key !== 'name') {
+            for (let j = 1; j < 6; j++)
+                if (json[i][key] === j)
+                    console.log("1");
+                else
+                    console.log("2")
+        }
+    });
+</script>

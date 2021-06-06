@@ -129,6 +129,8 @@ router.get('/table', [authMiddleware], (async (req, res) => {
 
 router.get('/graphics', (async (req, res) => {
     let name = await getName(req);
+    const items = await MainModel.find({}).lean();
+    let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/graphics.ejs', {
         title: "Таблица",
         isIndex: true,
