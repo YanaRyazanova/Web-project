@@ -22,7 +22,6 @@ function getRoles(req) {
 }
 
 router.get('/', ( async (req, res) => {
-    const items = await MainModel.find({}).lean();
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/main.ejs', {
         title: "Главная страница",
@@ -46,16 +45,6 @@ router.get('/login', (async (req, res) => {
         title: "Авторизация",
         isIndex: true,
         isAuth: isAuth})
-}));
-
-router.get('/test', (async (req, res) => {
-    const items = await MainModel.find({}).lean();
-    res.render('../views/layouts/adminDashboard.ejs', {
-        title: "Тест",
-        isIndex: true,
-        json: items,
-        isAuth: true
-    });
 }));
 
 router.get('/logout', (async (req, res) => {
