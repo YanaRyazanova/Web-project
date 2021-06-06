@@ -1,0 +1,16 @@
+<tr>
+    <th scope="row"><%= json[i]['name'] %></th>
+    <% Object.keys(json[i]).forEach(function (key) { %>
+        <% if(key !== '_id' && key !== '__v' && key !== 'name'){ %>
+            <td>
+                <%if (role === "USER") {%>
+                    <%=json[i][key]%>
+                <%} else {%>
+                    <label>
+                        <input type="text" name="list1" class="selector" value="<%=json[i][key]%>">
+                    </label>
+                <%}%>
+            </td>
+        <% } %>
+    <% }) %>
+</tr>

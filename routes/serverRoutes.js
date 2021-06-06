@@ -103,7 +103,8 @@ router.get('/table', [authMiddleware], (async (req, res) => {
             isIndex: true,
             json: items,
             isAuth: isAuth,
-            name: name
+            name: name,
+            role: "ADMIN"
         });
     }
     else if (roles.includes("EDITOR")){
@@ -113,7 +114,8 @@ router.get('/table', [authMiddleware], (async (req, res) => {
             isIndex: true,
             json: items,
             isAuth: isAuth,
-            name: name
+            name: name,
+            role: "EDITOR"
         });
     }
     else if (roles.includes("USER")){
@@ -123,7 +125,8 @@ router.get('/table', [authMiddleware], (async (req, res) => {
             isIndex: true,
             json: items,
             isAuth: isAuth,
-            name: name
+            name: name,
+            role: "USER"
         });
     }
 }))
