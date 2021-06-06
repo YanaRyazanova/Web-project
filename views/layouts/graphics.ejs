@@ -6,5 +6,83 @@
     <body>
         <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
 
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load("current", {packages:['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                let items = JSON.parse('<%- JSON.stringify(json) %>');
+                let keys = {}
+                for (let item of items) {
+                    for (let key in item) {
+                        if (key !== "name" && key !== "_id" && key !== "__v")
+                            keys[key] = 0;
+                    }
+                }
+                items.forEach(elem => {
+                    for (let key in keys) {
+                        keys[key] += parseInt(elem[key])
+                    }
+                });
+                let columnsCharts = [["Element", "Общая сумма", { role: "style" }]];
+                for (let key in keys) {
+                    columnsCharts.push([key, keys[key], "#76A7FA"])
+                }
+                let data = google.visualization.arrayToDataTable(columnsCharts);
+
+                let view = new google.visualization.DataView(data);
+                view.setColumns([0, 1,
+                    { calc: "stringify",
+                        sourceColumn: 1,
+                        type: "string",
+                        role: "annotation" },
+                    2]);
+
+                let options = {
+                    title: "Суммарные показатели группы по каждому критерию",
+                    width: 700,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
+                    legend: { position: "none" },
+                };
+                let chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                chart.draw(view, options);
+            }
+        </script>
+        <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load("current", {packages:['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                let items = JSON.parse('<%- JSON.stringify(json) %>');
+                let keys = {}
+                for (let item of items) {
+                    for (let key in item) {
+                        if (key !== "name" && key !== "_id" && key !== "__v")
+                            keys[key] = 0;
+                    }
+                }
+                items.forEach(elem => {
+                    for (let key in keys) {
+                        keys[key] += parseInt(elem[key])
+                    }
+                });
+                let pieces = [ ['Показатели', 'Значения'] ];
+                for (let key in keys) {
+                    pieces.push([key, keys[key]])
+                }
+                let data = google.visualization.arrayToDataTable(pieces);
+
+                let options = {
+                    title: 'Статистика для человека'
+                };
+
+                let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
     </body>
 </html>
