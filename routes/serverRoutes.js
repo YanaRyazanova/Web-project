@@ -135,7 +135,7 @@ router.get('/graphics', (async (req, res) => {
     const items = await MainModel.find({}).lean();
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/graphics.ejs', {
-        title: "Таблица",
+        title: "Графики",
         isIndex: true,
         json: items,
         isAuth: isAuth,
