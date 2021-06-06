@@ -97,7 +97,7 @@ router.get('/table', [authMiddleware], (async (req, res) => {
     const roles = getRoles(req);
     let name = await getName(req);
     if (roles.includes("ADMIN")){
-        res.render('../views/layouts/adminDashboard.ejs', {
+        res.render('../views/layouts/mainTable.ejs', {
             title: "Таблица",
             isIndex: true,
             json: items,
@@ -108,7 +108,7 @@ router.get('/table', [authMiddleware], (async (req, res) => {
     }
     else if (roles.includes("EDITOR")){
         let name = await getName(req);
-        res.render('../views/layouts/editTable.ejs', {
+        res.render('../views/layouts/mainTable.ejs', {
             title: "Таблица",
             isIndex: true,
             json: items,
@@ -119,7 +119,7 @@ router.get('/table', [authMiddleware], (async (req, res) => {
     }
     else if (roles.includes("USER")){
         let name = await getName(req);
-        res.render('../views/layouts/readTable.ejs', {
+        res.render('../views/layouts/mainTable.ejs', {
             title: "Таблица",
             isIndex: true,
             json: items,

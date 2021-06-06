@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <%- include('../partials/head', {title: title}); %>
+</head>
+<body>
+    <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
+    <%- include('../partials/table/table', {role: role}) %>
+    <% if (role === 'ADMIN'){%>
+        <%- include('../partials/adminForms/addNewColumn.ejs')%>
+        <%- include('../partials/adminForms/addNewRow.ejs')%>
+    <%}%>
+    <%- include('../partials/comments', {json: json}); %>
+    <%- include('../partials/footer', {json: json}); %>
+</body>
+</html>
