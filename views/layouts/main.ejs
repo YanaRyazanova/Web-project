@@ -2,7 +2,7 @@
 <html lang="ru">
     <%- include('../partials/head', {title: title}); %>
     <body>
-
-        <%- include('../partials/navbar', {isAuth: isAuth}); %>
+        <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
+        <%- include('../partials/news'); %>
     </body>
 </html>

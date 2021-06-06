@@ -4,9 +4,9 @@
     <%- include('../partials/head', {title: title}); %>
 </head>
     <body>
-        <%- include('../partials/navbar', {isAuth: isAuth}); %>
-        <%- include('../partials/editor_table/table') %>
-
+        <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
+        <%- include('../partials/table/table') %>
+        <%- include('../partials/comments', {json: json}); %>
         <script>
             let items = JSON.parse('<%- JSON.stringify(json) %>');
             let keys = [];
@@ -31,7 +31,7 @@
                         fetch('/editor/api/update', {
                             method: 'post',
                             headers: {
-                                'Accept': 'application/json, text/plain, */*',
+                                'Accept': 'application/json',
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify( logJson )
@@ -42,5 +42,8 @@
                 }
             })
         </script>
+        <footer>
+            <p>© Проект выполнен в экстремальных условиях. Все права защищены.</p>
+        </footer>
     </body>
 </html>

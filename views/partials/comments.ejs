@@ -1,0 +1,30 @@
+<form action="/editor/api/addComment" method="post">
+    <br>
+    <label> Ребенок
+        <select name="x">
+            <% for (let i = 0; i < json.length; i++){ %>
+                <option><%= json[i]['name'] %></option>
+            <% } %>
+        </select>
+    </label>
+    <br>
+    <label> Критерий
+        <select name="y">
+            <% Object.keys(json[0]).forEach(function (key) { %>
+                <% if(key !== '_id' && key !== '__v' && key !== 'name'){ %>
+                    <option><%= key %></option>
+                <% } %>
+            <% }) %>
+        </select>
+    </label>
+    <br>
+    <label> Комментарий
+        <textarea name="comment">
+
+        </textarea>
+    </label>
+    <br>
+    <button>
+        Отправить комментарий
+    </button>
+</form>

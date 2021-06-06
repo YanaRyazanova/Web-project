@@ -20,19 +20,23 @@ class authController {
             if (!errors.isEmpty()){
                 res.status(403).json({ message: "Ошибка при регистрации", errors});
             }
-            const {username, password} = req.body;
-            const candidate = await User.findOne({ username });
-            if (candidate) {
-                res.status(403).json({ message: "Пользователем с таким именем уже существует"});
+            else {
+                const {username, password} = req.body;
+                const candidate = await User.findOne({username});
+                if (candidate) {
+                    res.status(403).json({message: "Пользователем с таким именем уже существует"});
+                } else {
+                    const hashPassword = bcrypt.hashSync(password, 7);
+                    const userRole = new Role({value: ["USER"]});
+                    const user = new User({username, password: hashPassword, roles: [userRole.value]});
+                    await user.save();
+                    const token = generateAccessToken(user._id, user.roles);
+                    res.cookie('user', token);
+                    return res.json({message: "Пользователь успешно зарегистирован!"});
+                }
             }
-            const hashPassword = bcrypt.hashSync(password, 7);
-            const userRole = new Role({ value: ["USER"]});
-            const user = new User({ username, password : hashPassword , roles: [userRole.value]});
-            await user.save();
-            const token = generateAccessToken(user._id, user.roles);
-            res.cookie('user', token);
-            return res.json({ message: "Пользователь успешно зарегистирован!"})
         }
+
         catch (e) {
             console.log(e);
             res.status(400).json({ message: "Registration error"});
@@ -42,9 +46,7 @@ class authController {
     async login(req, res) {
         try {
             const {username, password} = req.body;
-            console.log(req.body);
             const user = await User.findOne({ username });
-            console.log(user);
             if (!user) {
                 res.status(400).json({ message: "Такого пользователя не обнаружено:("});
             }
