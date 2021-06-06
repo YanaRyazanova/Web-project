@@ -6,7 +6,6 @@
     <body>
         <%- include('../partials/navbar', {isAuth: isAuth}); %>
         <%- include('../partials/editor_table/table.ejs', {json: json}); %>
-
         <div class="wrapper">
             <div id="formContent">
                 <h2>Добавить новую колонку</h2>
@@ -14,13 +13,13 @@
                     <label>
                         <h3>Название колонки</h3>
                         <br>
-                        <input type="text" required name="newColumn">
+                        <input class="formInput" type="text" required name="newColumn">
                     </label>
                     <br>
                     <label>
                         <h3>Значение по-умолчанию</h3>
                         <br>
-                        <input type="text" name="defaultValue" required>
+                        <input class="formInput" type="text" name="defaultValue" required>
                     </label>
                     <br>
                     <input type="submit" value="Добавить">
@@ -34,7 +33,7 @@
                     <label>
                         <h3>Имя</h3>
                         <br>
-                        <input type="text" required name="newUser">
+                        <input class="formInput" type="text" required name="newUser">
                     </label>
                     <br>
                     <input type="submit" value="Добавить">
