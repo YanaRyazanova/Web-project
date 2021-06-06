@@ -46,9 +46,7 @@ class authController {
     async login(req, res) {
         try {
             const {username, password} = req.body;
-            console.log(req.body);
             const user = await User.findOne({ username });
-            console.log(user);
             if (!user) {
                 res.status(400).json({ message: "Такого пользователя не обнаружено:("});
             }

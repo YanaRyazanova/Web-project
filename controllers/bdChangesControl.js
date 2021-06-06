@@ -51,7 +51,7 @@ class bdController
         newField[field] = value;
         await MainModel.updateOne({_id: id},
             [{$set: newField}]);
-        res.status(200).redirect('/');
+        res.status(200).redirect('/table');
     }
 }
 
