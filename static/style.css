@@ -81,14 +81,6 @@ caption, h2{
     margin: 20px;
 }
 
-caption {
-    padding-top: 30px;
-}
-
-nav {
-    position: fixed;
-    width: 100%;
-}
 
 .formInput {
     padding: 10px 20px;

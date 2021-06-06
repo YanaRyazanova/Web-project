@@ -1,5 +1,6 @@
 const express = require('express');
 const MainModel = require('../models/mainModel.js');
+const User = require('../models/User.js');
 
 const authMiddleware = require('../middleware/authMiddleware.js');
 const roleMiddleware = require('../middleware/roleMiddleware.js');
@@ -9,7 +10,7 @@ const { secretKey } = require('../config.js');
 
 const router = express.Router();
 
-function getRoles(req) {
+function verifyJwt(req) {
     if (req.headers.cookie === undefined) {
         return [];
     }
@@ -17,13 +18,25 @@ function getRoles(req) {
     if (!token){
         return { message: " Пользователь не авторизован"};
     }
-    const { roles: userRoles} = jwt.verify(token, secretKey);
+    return jwt.verify(token, secretKey);
+}
+
+function getRoles(req) {
+    const { roles : userRoles } = verifyJwt(req);
     return userRoles;
+}
+
+async function getName(req) {
+    const { id : currentId } = verifyJwt(req);
+    if (currentId === undefined)
+        return null;
+    const {username: user} = await User.findOne({ _id: currentId });
+    return user;
 }
 
 router.get('/', ( async (req, res) => {
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
-    let name = "GRISHA GAGAGA";
+    let name = await getName(req);
     res.render('../views/layouts/main.ejs', {
         title: "Главная страница",
         isIndex: true,
@@ -34,7 +47,7 @@ router.get('/', ( async (req, res) => {
 
 router.get('/register', (async (req, res) => {
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
-    let name;
+    let name = await getName(req);
     res.render('../views/layouts/registration.ejs',{
         title: "Регистрация",
             isIndex: true,
@@ -45,7 +58,7 @@ router.get('/register', (async (req, res) => {
 
 router.get('/login', (async (req, res) => {
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
-    let name;
+    let name = await getName(req);
     res.render('../views/layouts/authorization.ejs',{
         title: "Авторизация",
         isIndex: true,
@@ -56,7 +69,7 @@ router.get('/login', (async (req, res) => {
 
 router.get('/logout', (async (req, res) => {
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
-    let name;
+    let name = await getName(req);
     res.render('../views/layouts/logout.ejs',{
         title: "Выход",
         isIndex: true,
@@ -65,11 +78,24 @@ router.get('/logout', (async (req, res) => {
     })
 }));
 
+router.get('/profile', (async (req, res) => {
+    let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
+    let name = await getName(req);
+    let role = getRoles(req)[0];
+    res.render('../views/layouts/profile.ejs',{
+        title: "Профиль",
+        isIndex: true,
+        isAuth: isAuth,
+        name: name,
+        role: role
+    })
+}));
+
 router.get('/table', [authMiddleware], (async (req, res) => {
     const items = await MainModel.find({}).lean();
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     const roles = getRoles(req);
-    let name;
+    let name = await getName(req);
     if (roles.includes("ADMIN")){
         res.render('../views/layouts/adminDashboard.ejs', {
             title: "Таблица",
@@ -80,7 +106,7 @@ router.get('/table', [authMiddleware], (async (req, res) => {
         });
     }
     else if (roles.includes("EDITOR")){
-        let name;
+        let name = await getName(req);
         res.render('../views/layouts/editTable.ejs', {
             title: "Таблица",
             isIndex: true,
@@ -90,7 +116,7 @@ router.get('/table', [authMiddleware], (async (req, res) => {
         });
     }
     else if (roles.includes("USER")){
-        let name;
+        let name = await getName(req);
         res.render('../views/layouts/readTable.ejs', {
             title: "Таблица",
             isIndex: true,
