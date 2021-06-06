@@ -56,7 +56,7 @@ router.get('/test', (async (req, res) => {
         json: items,
         isAuth: true
     });
-}))
+}));
 
 router.get('/logout', (async (req, res) => {
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
