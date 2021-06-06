@@ -94,9 +94,6 @@ caption, h2{
     border-radius: 5px 5px 5px 5px;
 }
 
-input[type=submit] {
-    margin: 20px;
-}
 
 .wrapper {
     display: flex;
@@ -136,4 +133,29 @@ textarea {
     border: 1px solid #cecece;
     border-radius: 8px 0 0 0;
     padding: 8px 0 8px 10px;
+}
+input[type=button], input[type=submit], input[type=reset]  {
+    background-color: #56baed;
+    color: white;
+    border: none;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+
+    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px 20px 40px 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+    background-color: #39ace7;
 }

@@ -1,9 +1,12 @@
+<script>
+
+</script>
 <div class="wrapper">
     <div id="formContent">
-        <form action="/editor/api/addComment" method="post">
+        <form name="commentForm">
             <label>
                 <h3>Ребенок</h3>
-                <select name="x">
+                <select name="x" required>
                     <% for (let i = 0; i < json.length; i++){ %>
                         <option><%= json[i]['name'] %></option>
                     <% } %>
@@ -11,7 +14,7 @@
             </label>
             <label>
                 <h3>Критерий</h3>
-                <select name="y">
+                <select name="y" required>
                     <% Object.keys(json[0]).forEach(function (key) { %>
                         <% if(key !== '_id' && key !== '__v' && key !== 'name'){ %>
                             <option><%= key %></option>
@@ -21,7 +24,7 @@
             </label>
             <label>
                 <h3>Комментарий</h3>
-                <textarea name="comment">
+                <textarea name="comment" required>
 
                 </textarea>
             </label>

@@ -2,6 +2,36 @@
 <html lang="ru">
 <head>
     <%- include('../partials/head', {title: title}); %>
+    <script>
+        let authForm = document.forms[0];
+        authForm.onsubmit = async (e) => {
+            e.preventDefault();
+            let formData = new FormData(authForm)
+            alert("dd")
+            let bodyJson = {
+                "x" : formData.get("x"),
+                "y" : formData.get("y"),
+                comment : formData.get("comment")
+            }
+            let response = await fetch('/editor/api/addComment', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bodyJson)
+            });
+            if (response.status === 200) {
+                alert("Успешно!")
+                window.location.href = '/table';
+            }
+            else {
+                let result = await response.json();
+                alert(result.message);
+                window.location.href = '/table';
+            }
+
+        };
+    </script>
 </head>
     <body>
         <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
