@@ -3,14 +3,13 @@
     <% Object.keys(json[i]).forEach(function (key) {  %>
         <% if(key !== '_id' && key !== '__v' && key !== 'name'){ %>
         <td><label>
-                <!-- <select name="list1" class="selector">
+                <select name="list1" class="selector">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
-                </select> -->
-                <input type="text" value="<%=json[i][key]%>" class="selector">
+                </select>
             </label>
         </td>
         <% }%>
