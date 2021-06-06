@@ -15,7 +15,7 @@ router.post('/api/update', jsonParser, controller.changeFieldValue);
 router.post('/api/addComment', jsonParser, commentController.addComment);
 router.get('/api/getAllComments', (async (req, res) => {
     const comments = await CommentModel.find({ }).lean();
-    res.render('../views/layouts/commentsTable.ejs', {
+    res.render('../views/layouts/comments.ejs', {
         comments: comments
     })
 }));
