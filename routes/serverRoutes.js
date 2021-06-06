@@ -80,12 +80,14 @@ router.get('/logout', (async (req, res) => {
 
 router.get('/profile', (async (req, res) => {
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
-    let name;
+    let name = await getName(req);
+    let role = getRoles(req)[0];
     res.render('../views/layouts/profile.ejs',{
         title: "Профиль",
         isIndex: true,
         isAuth: isAuth,
-        name: name
+        name: name,
+        role: role
     })
 }));
 
