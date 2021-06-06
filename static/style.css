@@ -115,3 +115,10 @@ input[type=submit] {
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     text-align: center;
 }
+
+footer {
+    background-color: #1c87bd;
+    height: 100px;
+    text-align: center;
+    top: 50%;
+}
