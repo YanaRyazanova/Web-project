@@ -4,14 +4,7 @@
         <% if(key !== '_id' && key !== '__v' && key !== 'name'){ %>
             <td>
                 <label>
-                    <select name="list1" class="selector">
-                        <%for (let j = 1; j < 6; j++){%>
-                            <%if(json[i][key] === j) {%>
-                                <option selected><%=j%></option>
-                            <%} else {%>
-                                <option ><%=j%></option>
-                            <%}}%>
-                    </select>
+                    <input type="text" name="list1" class="selector">
                 </label>
             </td>
         <% } %>
