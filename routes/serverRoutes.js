@@ -7,6 +7,7 @@ const roleMiddleware = require('../middleware/roleMiddleware.js');
 
 const jwt = require('jsonwebtoken');
 const { secretKey } = require('../config.js');
+//const secretKey = process.env.secretKey;
 
 const router = express.Router();
 
@@ -121,7 +122,7 @@ router.get('/graphics', (async (req, res) => {
     const items = await MainModel.find({}).lean();
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     res.render('../views/layouts/graphics.ejs', {
-        title: "Таблица",
+        title: "Графики",
         isIndex: true,
         json: items,
         isAuth: isAuth,

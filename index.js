@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('./config.js');
+const dbConnect = config.dbConnect;
+//const dbConnect = process.env.dbConnect;
 const path = require('path');
 const serverRoutes = require('./routes/serverRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
@@ -9,7 +11,7 @@ const editorRoutes = require('./routes/redactorApiRoutes.js');
 const cookieParser = require("cookie-parser");
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const _dirname = path.resolve();
 
 const app = express();
@@ -28,7 +30,7 @@ app.use(cookieParser());
 
 async function start() {
     try {
-        await mongoose.connect(config.dbConnect, {
+        await mongoose.connect(dbConnect, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
