@@ -127,4 +127,15 @@ router.get('/table', [authMiddleware], (async (req, res) => {
     }
 }))
 
+router.get('/graphics', (async (req, res) => {
+    let name = await getName(req);
+    res.render('../views/layouts/graphics.ejs', {
+        title: "Таблица",
+        isIndex: true,
+        json: items,
+        isAuth: isAuth,
+        name: name
+    });
+}));
+
 module.exports = router;
