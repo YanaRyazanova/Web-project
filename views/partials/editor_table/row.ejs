@@ -2,13 +2,17 @@
     <th scope="row"><%= json[i]['name']%></th>
     <% Object.keys(json[i]).forEach(function (key) {  %>
         <% if(key !== '_id' && key !== '__v' && key !== 'name'){ %>
-        <td><label>
+        <td>
+            <label>
                 <select name="list1" class="selector">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <%
+                    for ( var j = 1; j < 6; j++ )
+                    {
+                        let selected = json[i][key] === j  ? "selected" : "";
+                    %>
+                        <option value="<%=json[i][key] %>" <%=selected %>><%=j %></option><%
+                    }
+                    %>
                 </select>
             </label>
         </td>
