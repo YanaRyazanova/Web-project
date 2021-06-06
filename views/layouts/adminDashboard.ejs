@@ -2,6 +2,29 @@
 <html lang="ru">
     <head>
         <%- include('../partials/head', {title: title});%>
+        <script>
+            function setOnSubmit(form, bodyJson, path) {
+                form.onsubmit = async (e) => {
+                    e.preventDefault();
+                    let response = await fetch(path, {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(bodyJson)
+                    });
+                    if (response.status === 200) {
+                        alert("Успешно!")
+                        window.location.href = '/table';
+                    }
+                    else {
+                        let result = await response.json();
+                        alert(result.message);
+                        window.location.href = '/table';
+                    }
+                }
+            }
+        </script>
     </head>
     <body>
         <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
@@ -9,7 +32,7 @@
         <div class="wrapper">
             <div id="formContent">
                 <h2>Добавить новую колонку</h2>
-                <form action="/admin/api/addColumn" method="post">
+                <form >
                     <label>
                         <h3>Название колонки</h3>
                         <br>
@@ -26,10 +49,19 @@
                 </form>
             </div>
         </div>
+        <script>
+            let form = document.forms[0]
+            let formData = new FormData(form)
+            let bodyJson = {
+                "newColumn" : formData.get("newColumn"),
+                "defaultValue" : formData.get("defaultValue")
+            };
+            setOnSubmit(form, bodyJson, "/admin/api/addColumn")
+        </script>
         <div class="wrapper">
             <div id="formContent">
                 <h2>Добавить новую строчку</h2>
-                <form action="/admin/api/addRow" method="post">
+                <form>
                     <label>
                         <h3>Имя</h3>
                         <br>
@@ -40,6 +72,14 @@
                 </form>
             </div>
         </div>
+        <script>
+            let form = document.forms[2]
+            let formData = new FormData(form)
+            let bodyJson = {
+                "newUser" : formData.get("newUser")
+            };
+            setOnSubmit(form, bodyJson, "/admin/api/addRow")
+        </script>
         <%- include('../partials/comments', {json: json}); %>
         <script>
             let items = JSON.parse('<%- JSON.stringify(json) %>');
