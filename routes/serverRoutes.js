@@ -6,7 +6,8 @@ const authMiddleware = require('../middleware/authMiddleware.js');
 const roleMiddleware = require('../middleware/roleMiddleware.js');
 
 const jwt = require('jsonwebtoken');
-const { secretKey } = require('../config.js');
+//const { secretKey } = require('../.env');
+const secretKey = process.env.secretKey;
 
 const router = express.Router();
 
