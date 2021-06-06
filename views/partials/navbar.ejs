@@ -6,7 +6,10 @@
                 <li><a href="/login">Войти</a></li>
             <%} else {%>
                 <li><a href="/table">Таблица</a></li>
-                <li><a href="/logout">Выйти</a></li>
+                <div class="rightPlace">
+                    <li><a href="#"><%= name%></a></li>
+                    <li><a href="/logout">Выйти</a></li>
+                </div>
             <%}%>
         </ul>
     </div>

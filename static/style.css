@@ -31,7 +31,8 @@ li a {
 li a:hover {
     background-color: #2fa0db;
 }
-ul li:last-child{
+
+ul .rightPlace{
     float: right;
     padding-right: 30px;
 }
