@@ -78,6 +78,17 @@ router.get('/logout', (async (req, res) => {
     })
 }));
 
+router.get('/profile', (async (req, res) => {
+    let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
+    let name;
+    res.render('../views/layouts/profile.ejs',{
+        title: "Профиль",
+        isIndex: true,
+        isAuth: isAuth,
+        name: name
+    })
+}));
+
 router.get('/table', [authMiddleware], (async (req, res) => {
     const items = await MainModel.find({}).lean();
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
