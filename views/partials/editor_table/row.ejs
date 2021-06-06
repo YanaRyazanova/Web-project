@@ -4,7 +4,7 @@
         <% if(key !== '_id' && key !== '__v' && key !== 'name'){ %>
             <td>
                 <label>
-                    <input type="text" name="list1" class="selector">
+                    <input type="text" name="list1" class="selector" value="<%=json[i][key]%>">
                 </label>
             </td>
         <% } %>
