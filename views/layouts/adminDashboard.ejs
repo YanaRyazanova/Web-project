@@ -44,40 +44,8 @@
     <body>
         <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
         <%- include('../partials/table/table.ejs', {json: json}); %>
-        <div class="wrapper">
-            <div id="formContent">
-                <h2>Добавить новую колонку</h2>
-                <form action="/admin/api/addColumn", method="post">
-                    <label>
-                        <h3>Название колонки</h3>
-                        <br>
-                        <input class="formInput" type="text" required name="newColumn">
-                    </label>
-                    <br>
-                    <label>
-                        <h3>Значение по-умолчанию</h3>
-                        <br>
-                        <input class="formInput" type="text" name="defaultValue" required>
-                    </label>
-                    <br>
-                    <input type="submit" value="Добавить">
-                </form>
-            </div>
-        </div>
-        <div class="wrapper">
-            <div id="formContent">
-                <h2>Добавить новую строчку</h2>
-                <form action="/admin/api/addRow" method="post">
-                    <label>
-                        <h3>Имя</h3>
-                        <br>
-                        <input class="formInput" type="text" required name="newUser">
-                    </label>
-                    <br>
-                    <input type="submit" value="Добавить">
-                </form>
-            </div>
-        </div>
+        <%- include('../partials/adminForms/addNewColumn.ejs'); %>
+        <%- include('../partials/adminForms/addNewRow.ejs'); %>
 <!--        <script>-->
 <!--            setOnSubmit(document.forms[0], getBodyJsonAddNewColumn, "/admin/api/addColumn")-->
 <!--            setOnSubmit(document.forms[1], getBodyJsonAddNewRow,'/admin/api/addRow')-->

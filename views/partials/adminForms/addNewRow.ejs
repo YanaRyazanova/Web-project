@@ -1,14 +1,16 @@
 <div class="wrapper">
-    <div id="formContent">
-        <h2>Добавить новую строчку</h2>
-        <form action="/admin/api/addRow" method="post">
-            <label>
-                <h3>Имя</h3>
+    <div class="formContent">
+        <div id="formContent">
+            <h2>Добавить новую строчку</h2>
+            <form action="/admin/api/addRow" method="post">
+                <label>
+                    <h3>Имя</h3>
+                    <br>
+                    <input class="formInput" type="text" required name="newUser">
+                </label>
                 <br>
-                <input class="formInput" type="text" required name="newUser">
-            </label>
-            <br>
-            <input type="submit" value="Добавить">
-        </form>
+                <input type="submit" value="Добавить">
+            </form>
+        </div>
     </div>
 </div>

@@ -1,20 +1,22 @@
 <div class="wrapper">
-    <div id="formContent">
-        <h2>Добавить новую колонку</h2>
-        <form action="/admin/api/addColumn" method="post">
-            <label>
-                <h3>Название колонки</h3>
+    <div class="formContent">
+        <div id="formContent">
+            <h2>Добавить новую колонку</h2>
+            <form action="/admin/api/addColumn" method="post">
+                <label>
+                    <h3>Название колонки</h3>
+                    <br>
+                    <input class="formInput" type="text" required name="newColumn">
+                </label>
                 <br>
-                <input class="formInput" type="text" required name="newColumn">
-            </label>
-            <br>
-            <label>
-                <h3>Значение по-умолчанию</h3>
+                <label>
+                    <h3>Значение по-умолчанию</h3>
+                    <br>
+                    <input class="formInput" type="text" name="defaultValue" required>
+                </label>
                 <br>
-                <input class="formInput" type="text" name="defaultValue" required>
-            </label>
-            <br>
-            <input type="submit" value="Добавить">
-        </form>
+                <input type="submit" value="Добавить">
+            </form>
+        </div>
     </div>
 </div>
