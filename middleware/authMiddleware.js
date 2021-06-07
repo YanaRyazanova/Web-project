@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { secretKey } = require('../config.js');
-//const secretKey = process.env.secretKey;
+//const { secretKey } = require('../config.js');
+const secretKey = process.env.secretKey;
 const cookieParser = require("cookie-parser");
 
 module.exports = function (req, res, next) {
