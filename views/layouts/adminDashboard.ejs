@@ -2,54 +2,13 @@
 <html lang="ru">
     <head>
         <%- include('../partials/head', {title: title});%>
-<!--        <script>-->
-<!--            function getBodyJsonAddNewColumn(form) {-->
-<!--                let formData = new FormData(form);-->
-<!--                return {-->
-<!--                    "newColumn" : formData.get("newColumn"),-->
-<!--                    "defaultValue" : formData.get("defaultValue")-->
-<!--                };-->
-<!--            }-->
 
-<!--            function getBodyJsonAddNewRow(form) {-->
-<!--                let formData = new FormData(form);-->
-<!--                return {-->
-<!--                    "newUser" : formData.get("newUser")-->
-<!--                };-->
-<!--            }-->
-
-<!--            function setOnSubmit(form, getBodyJson, path) {-->
-<!--                form.onsubmit = async (e) => {-->
-<!--                    e.preventDefault();-->
-<!--                    let response = await fetch(path, {-->
-<!--                        method: 'post',-->
-<!--                        headers: {-->
-<!--                            'Content-Type': 'application/json',-->
-<!--                        },-->
-<!--                        body: JSON.stringify(getBodyJson(form))-->
-<!--                    });-->
-<!--                    if (response.status === 200) {-->
-<!--                        alert("Успешно!")-->
-<!--                        window.location.href = '/table';-->
-<!--                    }-->
-<!--                    else {-->
-<!--                        let result = await response.json();-->
-<!--                        alert(result.message);-->
-<!--                        window.location.href = '/table';-->
-<!--                    }-->
-<!--                }-->
-<!--            }-->
-<!--        </script>-->
     </head>
     <body>
         <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
         <%- include('../partials/table/table.ejs', {json: json}); %>
         <%- include('../partials/adminForms/addNewColumn.ejs'); %>
         <%- include('../partials/adminForms/addNewRow.ejs'); %>
-<!--        <script>-->
-<!--            setOnSubmit(document.forms[0], getBodyJsonAddNewColumn, "/admin/api/addColumn")-->
-<!--            setOnSubmit(document.forms[1], getBodyJsonAddNewRow,'/admin/api/addRow')-->
-<!--        </script>-->
         <%- include('../partials/comments', {json: json}); %>
         <script>
             let items = JSON.parse('<%- JSON.stringify(json) %>');
