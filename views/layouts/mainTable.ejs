@@ -28,7 +28,7 @@
                 let rowIndex = selector.parentNode.parentNode.parentNode.rowIndex - 1;
                 selector.addEventListener('change', function (e) {
                     let logJson = {
-                        'value': selector.options[selector.selectedIndex].text,
+                        'value': selector.value,
                         'id': items[rowIndex]['_id'],
                         'field': keys[cellIndex]
                     };
