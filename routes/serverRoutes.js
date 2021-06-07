@@ -98,26 +98,29 @@ router.get('/table', [authMiddleware], (async (req, res) => {
     const comments = await CommentModel.find({ }).lean();
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     const roles = getRoles(req);
-    let name = await getName(req);
-    let role = ""
-    if (roles.includes("ADMIN")){
-        role = "ADMIN"
+    if (roles === undefined){
+        res.redirect('/')
     }
-    else if (roles.includes("EDITOR")){
-        role = "EDITOR"
+    else {
+        let name = await getName(req);
+        let role = ""
+        if (roles.includes("ADMIN")) {
+            role = "ADMIN"
+        } else if (roles.includes("EDITOR")) {
+            role = "EDITOR"
+        } else if (roles.includes("USER")) {
+            role = "USER"
+        }
+        res.render('../views/layouts/mainTable.ejs', {
+            title: "Таблица",
+            isIndex: true,
+            json: items,
+            isAuth: isAuth,
+            name: name,
+            role: role,
+            comments: comments
+        });
     }
-    else if (roles.includes("USER")){
-        role = "USER"
-    }
-    res.render('../views/layouts/mainTable.ejs', {
-        title: "Таблица",
-        isIndex: true,
-        json: items,
-        isAuth: isAuth,
-        name: name,
-        role: role,
-        comments: comments
-    });
 }))
 
 router.get('/graphics', (async (req, res) => {
