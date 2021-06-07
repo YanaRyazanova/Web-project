@@ -13,5 +13,40 @@
     <%- include('../partials/commentsForm', {json: json}); %>
     <%- include('../partials/commentsPage', {comments: comments}); %>
     <%- include('../partials/footer'); %>
+    <script>
+        let items = JSON.parse('<%- JSON.stringify(json) %>');
+        let keys = [];
+        for (let key of document.querySelectorAll('th')) {
+            if (key.attributes[0].value === "col") {
+                keys.push(key.innerText);
+            }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            let selectors = document.querySelectorAll('.selector');
+            for (let selector of selectors) {
+                let cellIndex = selector.parentNode.parentNode.cellIndex - 1;
+                let rowIndex = selector.parentNode.parentNode.parentNode.rowIndex - 1;
+                selector.addEventListener('change', function (e) {
+                    let logJson = {
+                        'value': selector.options[selector.selectedIndex].text,
+                        'id': items[rowIndex]['_id'],
+                        'field': keys[cellIndex]
+                    };
+                    let data = new FormData();
+                    data.append( "json", JSON.stringify( logJson ) );
+                    fetch('/editor/api/update', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify( logJson )
+                    })
+                        .then(res => res.json())
+                        .then(res => console.log(res));
+                })
+            }
+        })
+    </script>
 </body>
 </html>
