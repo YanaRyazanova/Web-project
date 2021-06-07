@@ -1,5 +1,6 @@
 const express = require('express');
 const MainModel = require('../models/mainModel.js');
+const CommentModel = require('../models/comments.js');
 const User = require('../models/User.js');
 
 const authMiddleware = require('../middleware/authMiddleware.js');
@@ -94,6 +95,7 @@ router.get('/profile', (async (req, res) => {
 
 router.get('/table', [authMiddleware], (async (req, res) => {
     const items = await MainModel.find({}).lean();
+    const comments = await CommentModel.find({ }).lean();
     let isAuth = req.headers.cookie && req.headers.cookie.includes("user");
     const roles = getRoles(req);
     let name = await getName(req);
@@ -113,7 +115,8 @@ router.get('/table', [authMiddleware], (async (req, res) => {
         json: items,
         isAuth: isAuth,
         name: name,
-        role: role
+        role: role,
+        comments: comments
     });
 }))
 

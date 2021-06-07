@@ -5,12 +5,13 @@
 </head>
 <body>
     <%- include('../partials/navbar', {isAuth: isAuth, name: name}); %>
-    <%- include('../partials/table/table', {role: role}) %>
+    <%- include('../partials/table/table', {json:json, role: role}) %>
     <% if (role === 'ADMIN'){%>
         <%- include('../partials/adminForms/addNewColumn.ejs')%>
         <%- include('../partials/adminForms/addNewRow.ejs')%>
     <%}%>
-    <%- include('../partials/comments', {json: json}); %>
-    <%- include('../partials/footer', {json: json}); %>
+    <%- include('../partials/commentsForm', {json: json}); %>
+    <%- include('../partials/commentsPage', {comments: comments}); %>
+    <%- include('../partials/footer'); %>
 </body>
 </html>

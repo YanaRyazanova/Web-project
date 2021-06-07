@@ -1,0 +1,23 @@
+<table>
+    <thead>
+    <caption>Комментарии</caption>
+    <% Object.keys(comments[0]).forEach(function (key) {  %>
+        <% if(key !== '_id' && key !== '__v'){ %>
+        <th scope="col"><%=key%></th>
+        <% }%>
+    <% }) %>
+    </thead>
+    <tbody>
+    <% for (let i = 0; i < comments.length; i++){ %>
+        <tr>
+            <% Object.keys(comments[i]).forEach(function (key) { %>
+                <% if(key !== '_id' && key !== '__v'){ %>
+                <td>
+                    <%=comments[i][key]%>
+                </td>
+                <% } %>
+            <% }) %>
+        </tr>
+    <% } %>
+    </tbody>
+</table>
