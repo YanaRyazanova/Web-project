@@ -22,7 +22,7 @@ class bdController
             await MainModel.updateMany({},
                 [ {$set : value } ],
                 { strict: true });
-            res.status(200).json('Success!');
+            res.status(200).redirect('/table');
         } catch (e) {
             console.log(e);
             res.status(403).json({message: "Не удалось выполнить изменение", error: e});
@@ -38,7 +38,7 @@ class bdController
             await newRow.save();
             await MainModel.updateOne({ "name": newUser },
                 [ { $set: newFields } ]);
-            res.status(200).json('Super!');
+            res.status(200).redirect('/table');
         } catch (e) {
             console.log(e);
             res.status(403).json({message: "Не удалось выполнить изменение", error: e});
